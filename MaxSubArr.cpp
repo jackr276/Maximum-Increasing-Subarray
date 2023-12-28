@@ -75,3 +75,18 @@ int** findAllSubArrays(int array[]){
 
     return arr;
 }
+
+
+/**
+ * Determine if an array is increasing
+*/
+bool isIncreasing(int arr[]){
+
+    for(int i = 1; i < sizeof(arr)/sizeof(arr[0]); i++){
+        if(arr[i-1] > arr[i]){
+            return false;
+        }
+    }
+
+    return true;
+}

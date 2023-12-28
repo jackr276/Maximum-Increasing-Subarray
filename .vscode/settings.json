@@ -56,11 +56,15 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "files.associations": {
+    "*.embeddedhtml": "html",
     "*.rmd": "markdown",
     "ostream": "cpp",
     "*.tcc": "cpp",
     "iostream": "cpp",
+    "iosfwd": "cpp",
+    "string": "cpp",
+    "queue": "cpp",
     "fstream": "cpp",
-    "iosfwd": "cpp"
+    "set": "cpp"
   }
 }

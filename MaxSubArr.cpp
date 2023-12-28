@@ -26,7 +26,8 @@ using namespace std;
 
 
 //predeclare
-vector<vector<int>> findAllSubArrays(int array[], int size);
+vector<vector<int>> findAllIncrSubArrays(int array[], int size);
+bool isIncreasing(vector<int> subArr);
 
 int main(){
     int arr1[] = {2, 1, 4, 2};
@@ -35,12 +36,13 @@ int main(){
 
     int result[4];
     
-    vector<vector<int>> arr1Subs = findAllSubArrays(arr1, sizeof(arr1)/sizeof(arr1[0]));
+    vector<vector<int>> arr1Subs = findAllIncrSubArrays(arr1, sizeof(arr1)/sizeof(arr1[0]));
 
     for(auto &row: arr1Subs){
         for(auto &column: row){
-            bool status;
+            cout << column << " ";
         }
+        cout << endl;
     }
 }
 
@@ -57,7 +59,7 @@ bool findMaxSubArray(int arr1[], int arr2[], int (&result)[]){
 /**
  * Iteratively find all nonempty subarrays
 */
-vector<vector<int>> findAllSubArrays(int array[], int size){
+vector<vector<int>> findAllIncrSubArrays(int array[], int size){
     //Stores all of our subarrays
     vector<vector<int>> subarrays;
 
@@ -72,7 +74,11 @@ vector<vector<int>> findAllSubArrays(int array[], int size){
                 tempVec.push_back(array[k]);
             }
 
-            subarrays.push_back(tempVec);
+            //we only want tempvec if it is increasing
+            if (isIncreasing(tempVec)){
+                subarrays.push_back(tempVec);
+            }
+
         }
     }
 
@@ -81,9 +87,13 @@ vector<vector<int>> findAllSubArrays(int array[], int size){
 
 
 /**
- * Determine if an array is increasing
+ * Determine if a vector is increasing
 */
 bool isIncreasing(vector<int> subArr){
+    //Automatically increasing it is of size 1
+    if (subArr.size() == 1){
+        return true;
+    }
 
     for(int i = 1; i < subArr.capacity(); i++){
         if (subArr.at(i-1) > subArr.at(i)){

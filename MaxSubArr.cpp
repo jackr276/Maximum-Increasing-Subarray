@@ -40,13 +40,38 @@ int main(){
 
 bool findMaxSubArray(int arr1[], int arr2[], int (&result)[]){
 
-    int arrSize = sizeof(arr1)/sizeof(int);
-
-    for(int i = 0; i < arrSize; i++){
-        
-    }
-
 
     return true;
 
+}
+
+
+/**
+ * Iteratively find all nonempty subarrays
+*/
+int** findAllSubArrays(int array[]){
+    int length = sizeof(array) / sizeof(array[0]);
+
+    /**
+     * Using formula: number of sub arrays = n(n+1)/2
+    */
+
+    int numSub = length * (length+1) / 2;
+
+    //hold all of our sub arrays
+    int** arr = new int*[length];
+
+    //starting point(potentially 0 to len(array))
+    for(int i = 0; i < length; i++){
+        //ending point(potentially i to len(array))
+        for(int j = i; j < length; j++){
+            
+            //for everything between, add to a result array
+            //TODO need some new kind of datastructure to push to, arrays won't work, not resizeable
+
+
+        }
+    }
+
+    return arr;
 }

@@ -18,4 +18,35 @@
 */
 
 
+//For printing
+#include <iostream>
+
 using namespace std;
+
+
+int main(){
+    int arr1[] = {2, 1, 4, 2};
+    int arr2[] = {4, 3, 2, 1};
+
+
+    int result[4];
+    
+    findMaxSubArray(arr1, arr2, result);
+
+    cout << result << endl;
+}
+
+
+
+bool findMaxSubArray(int arr1[], int arr2[], int (&result)[]){
+
+    int arrSize = sizeof(arr1)/sizeof(int);
+
+    for(int i = 0; i < arrSize; i++){
+        
+    }
+
+
+    return true;
+
+}

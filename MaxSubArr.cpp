@@ -5,8 +5,7 @@
  * %%%%%%%%%%%%%%%%%% Problem Description %%%%%%%%%%%%%%%%%%%
  * Given an array of k nonzero positive integers,
  * find the length n of the largest possible subarray in
- * which all elements are increasing, taking the "i"th element
- * from arr1 and the "i"th element from array 2 at any given time
+ * which all elements are increasing
 */
 
 

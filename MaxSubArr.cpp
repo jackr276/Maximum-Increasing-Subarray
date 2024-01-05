@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include <set>
 #include <time.h>
+#include <chrono>
 
 using namespace std;
 
@@ -34,18 +35,18 @@ int main(int argc, char *argv[]){
 
     int option = stoi(argv[1]);
 
-    int arr[100];
+    int arr[200];
     //generate a random array
     cout << "Initial Array:\n[";
     srand(time(NULL));
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 200; i++){
         //cut the random numbers down some
         arr[i] = rand()%1000;
         cout << arr[i]<< " ";
     }
     cout << "]" << endl;
 
-    vector<int> maxSubArray = findMaxSubArray(arr, 100, option);
+    vector<int> maxSubArray = findMaxSubArray(arr, 200, option);
 
     cout << "Largest increasing subarray\n[";
     
@@ -61,12 +62,19 @@ int main(int argc, char *argv[]){
 vector<int> findMaxSubArray(int (&arr)[], int size, int &option){
     set<vector<int>> arrSubs;
 
+    //for timing
+    chrono::time_point<chrono::system_clock> start, end;
+
     if(option == 0){
         cout << "Using Recursive Subarray Generation" << endl;
+        start = chrono::system_clock::now();
         findAllIncrSubArraysRec(arrSubs, arr, size, 0, 0);
+        end = chrono::system_clock::now();
     } else {
         cout << "Using Iterative Subarray Generation" << endl;
+        start = chrono::system_clock::now();
         findAllIncrSubArraysIter(arrSubs, arr, size);
+        end = chrono::system_clock::now();
     }
 
     //result
@@ -87,6 +95,10 @@ vector<int> findMaxSubArray(int (&arr)[], int size, int &option){
         }
         cout << "]" << endl;
     }
+
+    //elapsed time
+    chrono::duration<double> elapsed_seconds = end - start;
+    cout << "\nSubarray generation took: " << elapsed_seconds.count() << " seconds\n" << endl;
 
     return vec;
 }

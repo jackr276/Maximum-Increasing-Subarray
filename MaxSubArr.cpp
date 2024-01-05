@@ -23,7 +23,7 @@ using namespace std;
 void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int (&array)[], int size);
 void findAllIncrSubArraysRec(set<vector<int>> &arrSubs, int (&array)[], int size, int start, int end);
 vector<int> findMaxSubArray(int (&arr)[], int size, int &option);
-bool isIncreasing(vector<int> subArr);
+bool isIncreasing(vector<int> &subArr);
 
 
 // 0 for recursive, one for iterative
@@ -153,13 +153,13 @@ void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int (&array)[], int siz
 /**
  * Determine if a vector is increasing
 */
-bool isIncreasing(vector<int> subArr){
+bool isIncreasing(vector<int> &subArr){
     //Automatically increasing it is of size 1
     if (subArr.size() == 1){
         return true;
     }
 
-    for(int i = 1; i < subArr.capacity(); i++){
+    for(int i = 1; i < subArr.size(); i++){
         if (subArr.at(i-1) > subArr.at(i)){
             return false;
         }

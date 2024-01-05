@@ -20,7 +20,8 @@ using namespace std;
 
 
 //predeclare
-void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int array[], int size);
+void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int (&array)[], int size);
+void findAllIncrSubArraysRec(set<vector<int>> &arrSubs, int (&array)[], int size);
 vector<int> findMaxSubArray(int (&arr)[], int size, int &option);
 bool isIncreasing(vector<int> &subArr);
 
@@ -67,7 +68,7 @@ vector<int> findMaxSubArray(int (&arr)[], int size, int &option){
     int max = 0;
 
     //Show the user all subarrays that are increasing
-    for(auto &row: arr1Subs){
+    for(auto &row: arrSubs){
         cout << "[";
         if (row.size() > max){
             max = row.size();
@@ -83,10 +84,33 @@ vector<int> findMaxSubArray(int (&arr)[], int size, int &option){
 }
 
 
+void findAllIncrSubArraysRec(set<vector<int>> &arrSubs, int (&array)[], int size){
+
+}
+
+
+//helper function
+//works by moving start and end around, until end equals the size of the array
+void findSubRec(set<vector<int>> &arrSubs, int (&array)[], int size, int start, int end){
+    //if the end = the size of the array, we're done(base case)
+    if(end == size){
+        return;
+    }
+
+    if(start > end) {
+        
+    }
+
+
+}
+
+
+
+
 /**
  * Iteratively find all nonempty subarrays
 */
-void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int array[], int size){
+void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int (&array)[], int size){
 
     //starting point
     for(int i = 0; i < size; i++){

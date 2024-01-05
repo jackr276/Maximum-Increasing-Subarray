@@ -20,13 +20,19 @@ using namespace std;
 
 
 //predeclare
-set<vector<int>> findAllIncrSubArrays(int array[], int size);
-vector<int> findMaxSubArray(int (&arr)[], int size);
-bool isIncreasing(vector<int> subArr);
+void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int array[], int size);
+vector<int> findMaxSubArray(int (&arr)[], int size, int &option);
+bool isIncreasing(vector<int> &subArr);
 
 
+// 0 for recursive, one for iterative
+int main(int argc, char *argv[]){
+    if (argc < 2){
+        return -1;
+    }
 
-int main(){
+    int option = stoi(argv[1]);
+
     int arr[100];
     //generate a random array
     cout << "Initial Array:\n[";
@@ -38,7 +44,7 @@ int main(){
     }
     cout << "]" << endl;
 
-    vector<int> maxSubArray = findMaxSubArray(arr, 100);
+    vector<int> maxSubArray = findMaxSubArray(arr, 100, option);
 
     cout << "Largest increasing subarray\n[";
     
@@ -50,10 +56,10 @@ int main(){
 }
 
 
+// Option: 0 for recursion, 1 for iterative
+vector<int> findMaxSubArray(int (&arr)[], int size, int &option){
+    set<vector<int>> arrSubs;
 
-vector<int> findMaxSubArray(int (&arr)[], int size){
-    //only want unique entries
-    set<vector<int>> arr1Subs = findAllIncrSubArrays(arr, size);
     //result
     vector<int> vec;
 
@@ -80,9 +86,7 @@ vector<int> findMaxSubArray(int (&arr)[], int size){
 /**
  * Iteratively find all nonempty subarrays
 */
-set<vector<int>> findAllIncrSubArrays(int array[], int size){
-    //Stores all of our subarrays
-    set<vector<int>> subarrays;
+void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int array[], int size){
 
     //starting point
     for(int i = 0; i < size; i++){
@@ -97,20 +101,17 @@ set<vector<int>> findAllIncrSubArrays(int array[], int size){
 
             //we only want tempvec if it is increasing
             if (isIncreasing(tempVec)){
-                subarrays.insert(tempVec);
+                arrSubs.insert(tempVec);
             }
-
         }
     }
-
-    return subarrays;
 }
 
 
 /**
  * Determine if a vector is increasing
 */
-bool isIncreasing(vector<int> subArr){
+bool isIncreasing(vector<int> &subArr){
     //Automatically increasing it is of size 1
     if (subArr.size() == 1){
         return true;

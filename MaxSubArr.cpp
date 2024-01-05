@@ -21,7 +21,7 @@ using namespace std;
 
 //predeclare
 void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int (&array)[], int size);
-void findAllIncrSubArraysRec(set<vector<int>> &arrSubs, int (&array)[], int size);
+void findAllIncrSubArraysRec(set<vector<int>> &arrSubs, int (&array)[], int size, int start, int end);
 vector<int> findMaxSubArray(int (&arr)[], int size, int &option);
 bool isIncreasing(vector<int> &subArr);
 
@@ -61,6 +61,15 @@ int main(int argc, char *argv[]){
 vector<int> findMaxSubArray(int (&arr)[], int size, int &option){
     set<vector<int>> arrSubs;
 
+    if(option == 0){
+        cout << "Using Recursive Subarray Generation" << endl;
+        findAllIncrSubArraysRec(arrSubs, arr, size, 0, 0);
+    } else {
+        cout << "Using Iterative Subarray Generation" << endl;
+        findAllIncrSubArraysIter(arrSubs, arr, size);
+    }
+
+
     //result
     vector<int> vec;
 
@@ -84,27 +93,38 @@ vector<int> findMaxSubArray(int (&arr)[], int size, int &option){
 }
 
 
-void findAllIncrSubArraysRec(set<vector<int>> &arrSubs, int (&array)[], int size){
 
-}
-
-
-//helper function
+//recursive way of finding all increasing subarrays
 //works by moving start and end around, until end equals the size of the array
-void findSubRec(set<vector<int>> &arrSubs, int (&array)[], int size, int start, int end){
+void findAllIncrSubArraysRec(set<vector<int>> &arrSubs, int (&array)[], int size, int start, int end){
     //if the end = the size of the array, we're done(base case)
     if(end == size){
         return;
     }
 
+    //start has ranged from 0 to current end, so range from 0 to end + 1
     if(start > end) {
-        
+        findAllIncrSubArraysRec(arrSubs, array, size, 0, end+1);
+    } else {
+        //actually make the sub array
+        vector<int> subArr;
+
+        for(int i = start; i < end; i++){
+            subArr.push_back(array[i]);
+        }
+
+        //only put in if increasing
+        if(isIncreasing(subArr)){
+            //put the subarray in arrSubs
+            arrSubs.insert(subArr);
+        }
+
+        //increment start by 1 and do again
+        findAllIncrSubArraysRec(arrSubs, array, size, start+1, end);
     }
 
-
+    return;
 }
-
-
 
 
 /**

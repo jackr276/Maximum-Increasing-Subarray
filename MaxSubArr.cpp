@@ -23,7 +23,7 @@ using namespace std;
 void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int (&array)[], int size);
 void findAllIncrSubArraysRec(set<vector<int>> &arrSubs, int (&array)[], int size, int start, int end);
 vector<int> findMaxSubArray(int (&arr)[], int size, int &option);
-bool isIncreasing(vector<int> &subArr);
+bool isIncreasing(vector<int> subArr);
 
 
 // 0 for recursive, one for iterative
@@ -68,7 +68,6 @@ vector<int> findMaxSubArray(int (&arr)[], int size, int &option){
         cout << "Using Iterative Subarray Generation" << endl;
         findAllIncrSubArraysIter(arrSubs, arr, size);
     }
-
 
     //result
     vector<int> vec;
@@ -136,7 +135,6 @@ void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int (&array)[], int siz
     for(int i = 0; i < size; i++){
         //ending point
         for(int j = i; j < size; j++){
-
             vector<int> tempVec;
             //Grab every element between start and end indexes
             for(int k = i; k <= j; k++){
@@ -155,7 +153,7 @@ void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int (&array)[], int siz
 /**
  * Determine if a vector is increasing
 */
-bool isIncreasing(vector<int> &subArr){
+bool isIncreasing(vector<int> subArr){
     //Automatically increasing it is of size 1
     if (subArr.size() == 1){
         return true;

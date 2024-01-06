@@ -42,19 +42,28 @@ int main(int argc, char *argv[]){
     for(int i = 0; i < 200; i++){
         //cut the random numbers down some
         arr[i] = rand()%1000;
-        cout << arr[i]<< " ";
+        cout << arr[i];
+
+        //print out comma if its not the last element, for neatness
+        if(i < 199){
+            cout << ", ";
+        }
     }
-    cout << "]" << endl;
+    cout << "]\n" << endl;
 
     vector<int> maxSubArray = findMaxSubArray(arr, 200, option);
 
-    cout << "Largest increasing subarray\n[";
+    cout << "Largest increasing subarray: [";
     
-    for (auto &elem : maxSubArray){
-        cout << elem << ",";
+    for(int i = 0; i < maxSubArray.size(); i++){
+        cout << maxSubArray[i];
+
+        if(i < maxSubArray.size()-1){
+            cout << ", ";
+        }
     }
 
-    cout << "]" << endl;
+    cout << "]\n" << endl;
 }
 
 
@@ -66,15 +75,15 @@ vector<int> findMaxSubArray(int (&arr)[], int size, int &option){
     chrono::time_point<chrono::system_clock> start, end;
 
     if(option == 0){
-        cout << "Using Recursive Subarray Generation" << endl;
         start = chrono::system_clock::now();
         findAllIncrSubArraysRec(arrSubs, arr, size, 0, 0);
         end = chrono::system_clock::now();
+        cout << "\nFound Using Recursive Subarray Generation\n" << endl;
     } else {
-        cout << "Using Iterative Subarray Generation" << endl;
         start = chrono::system_clock::now();
         findAllIncrSubArraysIter(arrSubs, arr, size);
         end = chrono::system_clock::now();
+        cout << "\nFound Using Iterative Subarray Generation\n" << endl;
     }
 
     //result
@@ -85,14 +94,21 @@ vector<int> findMaxSubArray(int (&arr)[], int size, int &option){
 
     //Show the user all subarrays that are increasing
     for(auto &row: arrSubs){
-        cout << "[";
         if (row.size() > max){
             max = row.size();
             vec = row;
         }
-        for(auto &column: row){
-            cout << column << ",";
+
+        cout << "[";
+
+        for(int i = 0; i < row.size(); i++){
+            cout << row[i];
+
+            if(i < row.size() - 1){
+                cout << ", ";
+            }
         }
+
         cout << "]" << endl;
     }
 
@@ -166,9 +182,9 @@ void findAllIncrSubArraysIter(set<vector<int>> &arrSubs, int (&array)[], int siz
  * Determine if a vector is increasing
 */
 bool isIncreasing(vector<int> &subArr){
-    //Automatically increasing it is of size 1
+    //For our purposes, 1 element arrays are not considered increasing
     if (subArr.size() == 1){
-        return true;
+        return false;
     }
 
     for(int i = 1; i < subArr.size(); i++){
